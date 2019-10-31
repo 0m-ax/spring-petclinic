@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'medicines')}">
+
+<body>
+
+  <h2>Medicines</h2>
+
+  <table id="vets" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+          <th>Expiry Date</th>
+          <th>Batch Number</th>
+          <th>Pet Type</th>
+          <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="medicine : ${medicines.medicinesList}">
+        <td th:text="${medicine.name}"></td>
+          <td th:text="${medicine.expiryDate}"></td>
+          <td th:text="${medicine.batchNumber}"></td>
+          <td th:text="${medicine.petType?.name}"></td>
+          <td><a th:href="@{medicine/{medicineID}/edit(medicineID=${medicine.id})}">Edit</a></td></tr>
+    </tbody>
+  </table>
+  <a class="btn btn-default" th:href="@{/medicine/new}">Add Medicine</a>
+  <a class="btn btn-default" th:href="@{/medicineExpired.html}">View Expired Medicine</a>
+  <a class="btn btn-default" th:href="@{/medicine.html}">View All Medicine</a>
+</body>
+</html>

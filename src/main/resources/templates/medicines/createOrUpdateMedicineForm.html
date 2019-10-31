@@ -1,0 +1,34 @@
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'medicines')}">
+
+<body>
+
+  <h2>
+    <th:block th:if="${medicine['new']}">New </th:block>
+    Pet
+  </h2>
+  <form th:object="${medicine}" class="form-horizontal" method="post">
+    <input type="hidden" name="id" th:value="*{id}" />
+    <div class="form-group has-feedback">
+      <input
+        th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
+      <input
+        th:replace="~{fragments/inputField :: input ('Expiry Date', 'expiryDate', 'date')}" />
+       <input
+        th:replace="~{fragments/inputField :: input ('Batch Number', 'batchNumber', 'number')}" />
+        <input
+                th:replace="~{fragments/selectField :: select ('Pet Type', 'petType', ${types})}" />
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button
+          th:with="text=${medicine['new']} ? 'Add Medicine' : 'Update Medicine'"
+          class="btn btn-default" type="submit" th:text="${text}">Add
+          Medicine</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+
+</html>
